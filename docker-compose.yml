@@ -1,0 +1,32 @@
+version: "3.9"
+services:
+
+  api:
+    build:
+      dockerfile: Dockerfile
+      context: .
+      args:
+        - image_name=apigw
+    image: wareed/enhanced-example-api-service
+    ports:
+      - "10000:10000"
+      - "11000:11000"
+    links:
+      - users
+      - orders
+
+  users:
+    build:
+      dockerfile: Dockerfile
+      context: .
+      args:
+        - image_name=users
+    image: wareed/enhanced-example-users-service
+
+  orders:
+    build:
+      dockerfile: Dockerfile
+      context: .
+      args:
+        - image_name=orders
+    image: wareed/enhanced-example-orders-service
