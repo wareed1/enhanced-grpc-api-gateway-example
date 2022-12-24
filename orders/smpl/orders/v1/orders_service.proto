@@ -23,13 +23,13 @@ message Order {
   string product = 4;
 }
 
-message ListOrdersWithUserRequest {
+message ListOrdersRequest {
 }
 
-message ListOrdersWithUserResponse {
+message ListOrdersResponse {
   repeated Order orders = 1;
 }
 
 service OrdersService {
-  rpc ListOrdersWithUser(ListOrdersWithUserRequest) returns (ListOrdersWithUserResponse);
+  rpc ListOrders(ListOrdersRequest) returns (ListOrdersResponse);
 }
