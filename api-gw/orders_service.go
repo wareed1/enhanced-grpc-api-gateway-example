@@ -30,7 +30,7 @@ func (o *ordersService) ListOrdersWithUser(ctx context.Context, request *pbo.Lis
 	}
 
 
-	allOrders, err := o.ordersClient.ListOrdersWithUser(ctx, &orderSvcV1.ListOrdersWithUserRequest{})
+	allOrders, err := o.ordersClient.ListOrders(ctx, &orderSvcV1.ListOrdersRequest{})
 	if err != nil {
 		return nil, status.Error(codes.Internal, err.Error())
 	}
