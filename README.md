@@ -3,10 +3,10 @@
 ## Introduction
 
 This repository brings together two existing repositories that demonstrate gRPC. The "enhancement" is to Konstantin Ostrovsky's API Gateway demonstration:
-<https://github.com/kostyay/grpc-api-gateway-example>
-Konstantin has an excellent blog that describes the architecture: <https://daily.dev/blog/api-gateway-for-grpc-microservices>
+<https://github.com/kostyay/grpc-api-gateway-example>.
+Konstantin has an excellent blog that describes the architecture: <https://daily.dev/blog/api-gateway-for-grpc-microservices>.
 
-A web search of "GPRC gateway" is sure to bring you here: <https://github.com/grpc-ecosystem/grpc-gateway> Scrolling down through the README, you get to a video introduction: <https://www.youtube.com/watch?v=Pq1paKC-fXk> What fascinated me with Johan Brandhorst's demo was the use of an OpenAPI user interface running in a web browser. Within the organization where I work, we specify our RESTful interfaces with OpenAPI. Johan's repository  <https://github.com/johanbrandhorst/grpc-gateway-boilerplate> uses the Buf CLI (versus protoc within Konstantin's Makefile). We make extensive use of linters within our organization and Johan's Makefile has an option to lint the .proto files. Hence, my curiousity was now piqued to add OpenAPI and use the Buf CLI in Konstantin's repository.
+A web search of "GPRC gateway" is sure to bring you here: <https://github.com/grpc-ecosystem/grpc-gateway>. Scrolling down through the README, you get to a video introduction: <https://www.youtube.com/watch?v=Pq1paKC-fXk>. What fascinated me with Johan Brandhorst's demo was the use of an OpenAPI user interface running in a web browser. Within the organization where I work, we specify our RESTful interfaces with OpenAPI. Johan's repository  <https://github.com/johanbrandhorst/grpc-gateway-boilerplate> uses the Buf CLI (versus protoc within Konstantin's Makefile). We make extensive use of linters within our organization and Johan's Makefile has an option to lint the .proto files. Hence, my curiousity was now piqued to add OpenAPI and use the Buf CLI in Konstantin's repository.
 
 I resisted the urge to change Konstantin's microservices. My one addition was to add code to the api-gw microservice to implement the following function to avoid bringing down the API Gateway microservice when doing a `GET` on `/api/v1/users`:
 
@@ -47,3 +47,4 @@ While the microservices are running, from a web browser, navigate to `https://lo
 Try it out/Execute on `GET /api/v1/orders` results in a response:
 
 ![Swagger GET Orders response](images/orders-response.png)
+
