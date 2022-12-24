@@ -15,8 +15,8 @@ const (
 
 type ordersService struct {}
 
-func (o *ordersService) ListOrdersWithUser(ctx context.Context, request *pbo.ListOrdersWithUserRequest) (*pbo.ListOrdersWithUserResponse, error) {
-	return &pbo.ListOrdersWithUserResponse{Orders: []*pbo.Order{
+func (o *ordersService) ListOrders(ctx context.Context, request *pbo.ListOrdersRequest) (*pbo.ListOrdersResponse, error) {
+	return &pbo.ListOrdersResponse{Orders: []*pbo.Order{
 		{
 			Id:      "o1",
 			UserId:  "1",
