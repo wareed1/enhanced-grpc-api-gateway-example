@@ -30,6 +30,12 @@ It includes the client:
 
 `third-party` contains dynamically-generate Swagger documentation.
 
+## Architecture
+
+The following diagram, reproduced and extended from Konstantin's blog, shows how the microservices, API gateway, client, and OpenAPI UI go together for this demonstration.
+
+![How all the parts fit together](images/architecture.png)
+
 ## Working with the project
 
 * `make clean` - Removes all generated files (Go binaries, Swagger documentation, protoc-gen-go output)
