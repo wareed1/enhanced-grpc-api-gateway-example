@@ -36,6 +36,10 @@ The following diagram, reproduced and extended from Konstantin's blog, shows how
 
 ![How all the parts fit together](images/architecture.png)
 
+The following diagram shows how the various files fit together when running the sample client application. Blue font represents code in this repository; green, generated external API; red, generated internal API.
+
+![Sequencing the parts](images/interactions.png)
+
 ## Working with the project
 
 * `make clean` - Removes all generated files (Go binaries, Swagger documentation, protoc-gen-go output)
