@@ -74,7 +74,7 @@ func Run(dialAddr string) error {
 
 	port := os.Getenv("PORT")
 	if port == "" {
-		port = "11000"
+		port = "80"
 	}
 	gatewayAddr := "0.0.0.0:" + port
 	gwServer := &http.Server{
