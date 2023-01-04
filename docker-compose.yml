@@ -9,8 +9,8 @@ services:
         - image_name=apigw
     image: wareed/enhanced-example-api-service
     ports:
-      - "10000:10000"
-      - "11000:11000"
+      - "80:80"
+      - "9090:9090"
     links:
       - users
       - orders
