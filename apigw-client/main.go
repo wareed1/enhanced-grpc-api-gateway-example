@@ -11,7 +11,7 @@ import (
 	"google.golang.org/grpc/credentials"
 )
 
-const apiSvc = "localhost:10000"
+const apiSvc = "localhost:9090"
 
 func main() {
     conn, err := grpc.DialContext(context.TODO(), apiSvc, 
