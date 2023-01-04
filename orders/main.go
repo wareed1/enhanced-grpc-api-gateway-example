@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	listenAddress = "0.0.0.0:10000"
+	listenAddress = "0.0.0.0:9090"
 )
 
 type ordersService struct {}
