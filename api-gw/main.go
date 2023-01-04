@@ -17,9 +17,9 @@ import (
 )
 
 const (
-	listenAddress = "0.0.0.0:10000"
-	ordersSvc = "orders:10000"
-	usersSvc = "users:10000"
+	listenAddress = "0.0.0.0:9090"
+	ordersSvc = "orders:9090"
+	usersSvc = "users:9090"
 )
 
 func newOrdersSvcClient() (ordersSvcV1.OrdersServiceClient, error) {
