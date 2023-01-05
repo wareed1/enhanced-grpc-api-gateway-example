@@ -14,6 +14,7 @@ import (
 	usersSvcV1 "github.com/wareed1/enhanced-grpc-api-gateway-example/gen/proto/go/smpl/users/v1"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
+	"google.golang.org/grpc/reflection"
 )
 
 const (
@@ -74,6 +75,9 @@ func main() {
 		// TODO: Replace with your own certificate!
 		grpc.Creds(credentials.NewServerTLSFromCert(&insecure.Cert)),
 	)
+
+	// Register reflection service on gRPC server.
+	reflection.Register(s)
 
 	pbo.RegisterOrdersServiceServer(s, NewOrdersService(usersClient, ordersClient))
 	pbu.RegisterUsersServiceServer(s, NewUsersService(usersClient))
