@@ -1,7 +1,5 @@
 BUF_VERSION:=v1.9.0
 SWAGGER_UI_VERSION:=v4.15.5
-SERVER_KEY:=$(shell cat ./certs/server.key)
-SERVER_CERT:=$(shell cat ./certs/server-cert.pem)
 
 clean:
 	rm -rf ./out
