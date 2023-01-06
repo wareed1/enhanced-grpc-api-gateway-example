@@ -40,11 +40,21 @@ The following diagram shows how the various files fit together when running the 
 
 ![Sequencing the parts](images/interactions.png)
 
+## Securing TLS
+
+As an addition to the two repositories I brought together, I have added a capability to secure the TLS connection to the API Gateway. The `make secure-tls` option generates certificates - including an Acme Corporation CA Root - and modifies the source code to make use of the signed server certificate. If you run the `make` on Windows (e.g., in Git bash) a script installs the CA certificate into the Windows trusted root store. Connecting to the API Gateway (`https:<your IP address>:80`) should result in a secure connection. If you run into difficulties and want to return to the insecure version of the code, run `make tls-insecure` to undo the changes.
+
+> **_NOTE:_**
+You need adminstrative priviledges to install the CA certficate. For example, when starting the Git bash shell, right click on the icon and `Run as administrator.` You can remove the certificate with `certmgr`.
+
+``` certutil -delstore "Root" "Acme Corporation CA Root" ```
 ## Working with the project
 
 * `make clean` - Removes all generated files (Go binaries, Swagger documentation, protoc-gen-go output)
 * `make lint` - Lints .proto files
 * `make generate` - Generates the Go client protocol buffers code
+* `make secure-tls` - Generate certificates and modify the code to use secure TLS for connecting to the gateway
+* `make insecure-tls` - Revert to the original code and an unsecured TLS connection
 * `make build` - Build the binaries for each of the microservices
 * `make run-servers` - Starts the microservices
 
@@ -57,4 +67,3 @@ While the microservices are running, from a web browser, navigate to `https://lo
 Try it out/Execute on `GET /api/v1/orders` results in a response:
 
 ![Swagger GET Orders response](images/orders-response.png)
-
