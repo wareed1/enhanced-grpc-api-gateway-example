@@ -51,7 +51,7 @@ You need adminstrative priviledges to install the CA certficate. For example, wh
 
 ## grpcurl
 
-One other small addition is registration of the server for reflection. This addition allows you to interact with the GRPC server. Here is some example interaction to show you what you can do and see.
+One other small addition is registration of the server for reflection. This addition allows you to interact with the GRPC server. Here is some example interactions to show you what you can do and see.
 
 ```
 $ grpcurl --insecure 192.168.0.141:9090 list
