@@ -48,6 +48,43 @@ As an addition to the two repositories I brought together, I have added a capabi
 You need adminstrative priviledges to install the CA certficate. For example, when starting the Git bash shell, right click on the icon and `Run as administrator.` You can remove the certificate with `certmgr`.
 
 ``` certutil -delstore "Root" "Acme Corporation CA Root" ```
+
+## grpcurl
+
+One other small addition is registration of the server for reflection. This addition allows you to interact with the GRPC server. Here is some example interaction to show you what you can do and see.
+
+```
+$ grpcurl --insecure 192.168.0.141:9090 list
+grpc.reflection.v1alpha.ServerReflection
+smpl.api.orders.v1.OrdersService
+smpl.api.users.v1.UsersService
+
+$ grpcurl --insecure 192.168.0.141:9090 list smpl.api.orders.v1.OrdersService
+smpl.api.orders.v1.OrdersService.ListOrdersWithUser
+
+$ grpcurl --insecure 192.168.0.141:9090 describe smpl.api.orders.v1.OrdersService.ListOrdersWithUser
+smpl.api.orders.v1.OrdersService.ListOrdersWithUser is a method:
+rpc ListOrdersWithUser ( .smpl.api.orders.v1.ListOrdersWithUserRequest ) returns ( .smpl.api.orders.v1.ListOrdersWithUserResponse ) {
+  option (.google.api.http) = { get:"/api/v1/orders" response_body:"orders" };
+  option (.grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    tags:"Orders" summary:"List orders" description:"List all orders on the server."
+  };
+}
+
+$ grpcurl --insecure 192.168.0.141:9090 list smpl.api.users.v1.UsersService
+smpl.api.users.v1.UsersService.CreateUser
+smpl.api.users.v1.UsersService.ListUsers
+
+$ grpcurl --insecure 192.168.0.141:9090 describe smpl.api.users.v1.UsersService.ListUsers
+smpl.api.users.v1.UsersService.ListUsers is a method:
+rpc ListUsers ( .smpl.api.users.v1.ListUsersRequest ) returns ( .smpl.api.users.v1.ListUsersResponse ) {
+  option (.google.api.http) = { get:"/api/v1/users" response_body:"users" };
+  option (.grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    tags:"Users" summary:"List users" description:"List all users on the server."
+  };
+}
+```
+
 ## Working with the project
 
 * `make clean` - Removes all generated files (Go binaries, Swagger documentation, protoc-gen-go output)
