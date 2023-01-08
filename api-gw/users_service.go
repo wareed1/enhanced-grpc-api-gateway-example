@@ -3,8 +3,8 @@ package main
 import (
 	"context"
 
-	pbu "github.com/wareed1/enhanced-grpc-api-gateway-example/gen/proto/go/smpl/api/users/v1"
-	usersSvcV1 "github.com/wareed1/enhanced-grpc-api-gateway-example/gen/proto/go/smpl/users/v1"
+	pbu "github.com/wareed1/enhanced-grpc-api-gateway-example/gen/proto/go/public/api/users/v1"
+	usersSvcV1 "github.com/wareed1/enhanced-grpc-api-gateway-example/gen/proto/go/private/users/v1"
     "google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )

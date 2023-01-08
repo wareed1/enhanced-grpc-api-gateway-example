@@ -3,9 +3,9 @@ package main
 import (
 	"context"
 
-	pbo "github.com/wareed1/enhanced-grpc-api-gateway-example/gen/proto/go/smpl/api/orders/v1"
-	usersSvcV1 "github.com/wareed1/enhanced-grpc-api-gateway-example/gen/proto/go/smpl/users/v1"
-	orderSvcV1 "github.com/wareed1/enhanced-grpc-api-gateway-example/gen/proto/go/smpl/orders/v1"
+	pbo "github.com/wareed1/enhanced-grpc-api-gateway-example/gen/proto/go/public/api/orders/v1"
+	usersSvcV1 "github.com/wareed1/enhanced-grpc-api-gateway-example/gen/proto/go/private/users/v1"
+	orderSvcV1 "github.com/wareed1/enhanced-grpc-api-gateway-example/gen/proto/go/private/orders/v1"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
