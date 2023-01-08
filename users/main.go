@@ -6,7 +6,7 @@ import (
 	"net"
 
 	"google.golang.org/grpc"
-	pbu "github.com/wareed1/enhanced-grpc-api-gateway-example/gen/proto/go/smpl/users/v1"
+	pbu "github.com/wareed1/enhanced-grpc-api-gateway-example/gen/proto/go/private/users/v1"
 )
 
 const (
