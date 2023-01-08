@@ -56,28 +56,28 @@ One other small addition is registration of the server for reflection. This addi
 ```
 $ grpcurl --insecure 192.168.0.141:9090 list
 grpc.reflection.v1alpha.ServerReflection
-smpl.api.orders.v1.OrdersService
-smpl.api.users.v1.UsersService
+public.api.orders.v1.OrdersService
+public.api.users.v1.UsersService
 
-$ grpcurl --insecure 192.168.0.141:9090 list smpl.api.orders.v1.OrdersService
-smpl.api.orders.v1.OrdersService.ListOrdersWithUser
+$ grpcurl --insecure 192.168.0.141:9090 list public.api.orders.v1.OrdersService
+public.api.orders.v1.OrdersService.ListOrdersWithUser
 
-$ grpcurl --insecure 192.168.0.141:9090 describe smpl.api.orders.v1.OrdersService.ListOrdersWithUser
-smpl.api.orders.v1.OrdersService.ListOrdersWithUser is a method:
-rpc ListOrdersWithUser ( .smpl.api.orders.v1.ListOrdersWithUserRequest ) returns ( .smpl.api.orders.v1.ListOrdersWithUserResponse ) {
+$ grpcurl --insecure 192.168.0.141:9090 describe public.api.orders.v1.OrdersService.ListOrdersWithUser
+public.api.orders.v1.OrdersService.ListOrdersWithUser is a method:
+rpc ListOrdersWithUser ( .public.api.orders.v1.ListOrdersWithUserRequest ) returns ( .public.api.orders.v1.ListOrdersWithUserResponse ) {
   option (.google.api.http) = { get:"/api/v1/orders" response_body:"orders" };
   option (.grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
     tags:"Orders" summary:"List orders" description:"List all orders on the server."
   };
 }
 
-$ grpcurl --insecure 192.168.0.141:9090 list smpl.api.users.v1.UsersService
-smpl.api.users.v1.UsersService.CreateUser
-smpl.api.users.v1.UsersService.ListUsers
+$ grpcurl --insecure 192.168.0.141:9090 list public.api.users.v1.UsersService
+public.api.users.v1.UsersService.CreateUser
+public.api.users.v1.UsersService.ListUsers
 
-$ grpcurl --insecure 192.168.0.141:9090 describe smpl.api.users.v1.UsersService.ListUsers
-smpl.api.users.v1.UsersService.ListUsers is a method:
-rpc ListUsers ( .smpl.api.users.v1.ListUsersRequest ) returns ( .smpl.api.users.v1.ListUsersResponse ) {
+$ grpcurl --insecure 192.168.0.141:9090 describe public.api.users.v1.UsersService.ListUsers
+public.api.users.v1.UsersService.ListUsers is a method:
+rpc ListUsers ( .public.api.users.v1.ListUsersRequest ) returns ( .public.api.users.v1.ListUsersResponse ) {
   option (.google.api.http) = { get:"/api/v1/users" response_body:"users" };
   option (.grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
     tags:"Users" summary:"List users" description:"List all users on the server."
@@ -97,7 +97,7 @@ rpc ListUsers ( .smpl.api.users.v1.ListUsersRequest ) returns ( .smpl.api.users.
 
 After starting the microservices in one shell (`make run-servers`), in a second shell, `cd` to `apigw-client` and run the client: `go run main.go`
 
-While the microservices are running, from a web browser, navigate to `https://localhost:11000/` In the "select a definition" dropdown, select `smpl/api/orders/v1/api_orders_service.swagger.json` This definition is the external interface to the Orders microservice exposed by the API gateway (vs. `smpl/orders/v1/orders_service.swagger.json` that is the private interface).
+While the microservices are running, from a web browser, navigate to `https://localhost:11000/` In the "select a definition" dropdown, select `public/api/orders/v1/api_orders_service.swagger.json` This definition is the external interface to the Orders microservice exposed by the API gateway (vs. `private/orders/v1/orders_service.swagger.json` that is the private interface).
 
 ![Select a Definition dropdown](images/select-a-definition.png)
 
