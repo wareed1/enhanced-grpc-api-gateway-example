@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package public.api.orders.v1;
+
+option go_package = "github.com/wareed1/enhanced-grpc-api-gateway-example/gen/proto/go/public/api/orders/v1";
+
+import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+// These annotations are used when generating the OpenAPI file.
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+  info: {version: "1.1", description: "Public API to the Orders service"};
+  external_docs: {
+    url: "https://github.com/johanbrandhorst/grpc-gateway-boilerplate";
+    description: "gRPC-gateway boilerplate repository";
+  }
+  schemes: HTTPS;
+};
+
+service OrdersService {
+  rpc ListOrdersWithUser(ListOrdersWithUserRequest) returns (ListOrdersWithUserResponse) {
+    option (google.api.http) = {
+      // Route to this method from GET requests to /api/v1/orders
+      get: "/api/v1/orders"
+      response_body: "orders"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "List orders"
+      description: "List all orders on the server."
+      tags: "Orders"
+    };
+  }
+}
+
+message Order {
+  string id = 1;
+  string user_id = 2;
+  string user_email = 3;
+  string product = 4;
+}
+
+message Orders {
+  string summary = 1;
+  repeated Order orders = 2;
+}
+
+message ListOrdersWithUserRequest {
+}
+
+message ListOrdersWithUserResponse {
+  Orders orders = 1;
+}
