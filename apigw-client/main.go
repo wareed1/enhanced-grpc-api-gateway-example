@@ -6,7 +6,7 @@ import (
 
 	"github.com/wareed1/enhanced-grpc-api-gateway-example/insecure"
 	"github.com/golang/protobuf/jsonpb"
-	apiClient "github.com/wareed1/enhanced-grpc-api-gateway-example/gen/proto/go/smpl/api/orders/v1"
+	apiClient "github.com/wareed1/enhanced-grpc-api-gateway-example/gen/proto/go/public/api/orders/v1"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 )
