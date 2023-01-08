@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package private.users.v1;
+
+option go_package = "github.com/wareed1/enhanced-grpc-api-gateway-example/gen/proto/go/private/users/v1";
+
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+// These annotations are used when generating the OpenAPI file.
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+  info: {version: "1.1", description: "Private API to the Users service"};
+  external_docs: {
+    url: "https://github.com/johanbrandhorst/grpc-gateway-boilerplate";
+    description: "gRPC-gateway boilerplate repository";
+  }
+  schemes: HTTPS;
+};
+
+message CreateUserRequest {
+  string email = 1;
+}
+
+message CreateUserResponse {
+  User user = 1;
+}
+
+message User {
+  string id = 1;
+  string email = 2;
+}
+
+message ListUsersRequest {
+}
+
+message ListUsersResponse {
+  repeated User users = 1;
+}
+
+service UsersService {
+  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
+  rpc ListUsers(ListUsersRequest) returns (ListUsersResponse);
+}
