@@ -14,8 +14,8 @@ import (
 	"github.com/wareed1/enhanced-grpc-api-gateway-example/third_party"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
     "github.com/wareed1/enhanced-grpc-api-gateway-example/insecure"
-    usersv1 "github.com/wareed1/enhanced-grpc-api-gateway-example/gen/proto/go/smpl/api/users/v1"
-	ordersv1 "github.com/wareed1/enhanced-grpc-api-gateway-example/gen/proto/go/smpl/api/orders/v1"
+    usersv1 "github.com/wareed1/enhanced-grpc-api-gateway-example/gen/proto/go/public/api/users/v1"
+	ordersv1 "github.com/wareed1/enhanced-grpc-api-gateway-example/gen/proto/go/public/api/orders/v1"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/grpclog"
@@ -84,7 +84,9 @@ func Run(dialAddr string) error {
 				gwmux.ServeHTTP(w, r)
 				return
 			}
-			oa.ServeHTTP(w, r)
+			if !strings.HasPrefix(r.URL.Path, "/private") {
+                oa.ServeHTTP(w, r)
+            }
 		}),
 	}
 	// Empty parameters mean use the TLS Config specified with the server.
