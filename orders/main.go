@@ -5,7 +5,7 @@ import (
 	"log"
 	"net"
 
-	pbo "github.com/wareed1/enhanced-grpc-api-gateway-example/gen/proto/go/smpl/orders/v1"
+	pbo "github.com/wareed1/enhanced-grpc-api-gateway-example/gen/proto/go/private/orders/v1"
 	"google.golang.org/grpc"
 )
 
