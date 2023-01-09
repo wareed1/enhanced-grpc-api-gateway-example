@@ -14,21 +14,34 @@ if [[ "$1" != "secure" && "$1" != "insecure" ]]; then
 fi
 
 if [[ "$1" == "secure" ]]; then
-	sed -i 's/\/insecure/\/secure/' "$API_GW_SOURCE"
-	sed -i 's/\&insecure\./\&secure\./' "$API_GW_SOURCE"
-	sed -i 's/\/insecure/\/secure/' "$API_GATEWAY_SOURCE"
-	sed -i 's/insecure\.Cert/secure\.Cert/' "$API_GATEWAY_SOURCE"
-    sed -i -e '/\/insecure/ s/\"github.com/\/\/\"github.com/' "$API_CLIENT_SOURCE"
-    sed -i '/^func main/a\\ 	creds, err := credentials.NewClientTLSFromFile("../certs/myCA.pem", "")\n	if err != nil {\n		panic(err)\n	}\n' "$API_CLIENT_SOURCE"
-    sed -i 's/grpc.WithTransportCredentials/\/\/grpc.WithTransportCredentials/' "$API_CLIENT_SOURCE"
-    sed -i '/\/\/grpc.WithTransportCredentials/a\\  	grpc.WithTransportCredentials(creds))' "$API_CLIENT_SOURCE"
+    grep -e "(insecure.Cert" -q "$API_GATEWAY_SOURCE"
+    RC=$?
+    echo "RC=$RC"
+    # if not already applied ...
+    if [[ "$RC" -eq 0 ]]; then
+        sed -i 's/\/insecure/\/secure/' "$API_GW_SOURCE"
+        sed -i 's/\&insecure\./\&secure\./' "$API_GW_SOURCE"
+        sed -i 's/\/insecure/\/secure/' "$API_GATEWAY_SOURCE"
+        sed -i 's/(insecure\.Cert/(secure\.Cert/' "$API_GATEWAY_SOURCE"
+        sed -i 's/{insecure\.Cert/{secure\.Cert/' "$API_GATEWAY_SOURCE"
+        sed -i -e '/\/insecure/ s/\"github.com/\/\/\"github.com/' "$API_CLIENT_SOURCE"
+        sed -i '/^func main/a\\ 	creds, err := credentials.NewClientTLSFromFile("../certs/myCA.pem", "")\n	if err != nil {\n		panic(err)\n	}\n' "$API_CLIENT_SOURCE"
+        sed -i 's/grpc.WithTransportCredentials/\/\/grpc.WithTransportCredentials/' "$API_CLIENT_SOURCE"
+        sed -i '/\/\/grpc.WithTransportCredentials/a\\  	grpc.WithTransportCredentials(creds))' "$API_CLIENT_SOURCE"
+    fi
 else
-	sed -i 's/\/secure/\/insecure/' "$API_GW_SOURCE"
-	sed -i 's/\&secure\./\&insecure\./' "$API_GW_SOURCE"
-	sed -i 's/\/secure/\/insecure/' "$API_GATEWAY_SOURCE"
-	sed -i 's/secure\.Cert/insecure\.Cert/' "$API_GATEWAY_SOURCE"
-    sed -i 's/\/\/\"github.com/\"github.com/' "$API_CLIENT_SOURCE"
-    sed -i -e '/creds, err := credentials.NewClientTLSFromFile/,+4d' "$API_CLIENT_SOURCE"
-    sed -i 's/\/\/grpc.WithTransportCredentials/grpc.WithTransportCredentials/' "$API_CLIENT_SOURCE"
-    sed -i -e '/grpc.WithTransportCredentials(creds)/,1d' "$API_CLIENT_SOURCE"
+    grep -e "(secure.Cert" -q "$API_GATEWAY_SOURCE"
+    RC=$?
+    echo "RC=$RC"
+    if [[ "$RC" -eq 0 ]]; then
+        sed -i 's/\/secure/\/insecure/' "$API_GW_SOURCE"
+        sed -i 's/\&secure\./\&insecure\./' "$API_GW_SOURCE"
+        sed -i 's/\/secure/\/insecure/' "$API_GATEWAY_SOURCE"
+        sed -i 's/(secure\.Cert/(insecure\.Cert/' "$API_GATEWAY_SOURCE"
+        sed -i 's/{secure\.Cert/{insecure\.Cert/' "$API_GATEWAY_SOURCE"
+        sed -i 's/\/\/\"github.com/\"github.com/' "$API_CLIENT_SOURCE"
+        sed -i -e '/creds, err := credentials.NewClientTLSFromFile/,+4d' "$API_CLIENT_SOURCE"
+        sed -i 's/\/\/grpc.WithTransportCredentials/grpc.WithTransportCredentials/' "$API_CLIENT_SOURCE"
+        sed -i -e '/grpc.WithTransportCredentials(creds)/,1d' "$API_CLIENT_SOURCE"
+    fi
 fi
